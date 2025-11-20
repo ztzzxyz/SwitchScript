@@ -1,14 +1,11 @@
 name: switchScript
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'README.md'
-      - 'switchScript.sh'
-  schedule:
-    - cron: 0 8 * * *
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
 
 env:
   SCRIPT_SH: switchScript.sh
@@ -37,6 +34,8 @@ jobs:
         chmod +x $SCRIPT_SH
         ./$SCRIPT_SH
         zip -rq SwitchSD.zip SwitchSD
+      env:
+        GH_TOKEN: ${{ secrets.PAT }}
 
     - name: Read description.txt
       id: description
@@ -51,22 +50,12 @@ jobs:
         allowUpdates: true
         tag: ${{ env.tag_name }}
         commit: main
-        token: ${{ secrets.actions_release }}
         body: "${{ steps.description.outputs.content }}"
         artifacts: "SwitchSD.zip"
-
-    - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@v0.3.2
-      with:
-        keep_latest: 5
-        delete_tags: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.actions_release }}
 
     - name: Delete workflow runs for current repo
       uses: Mattraks/delete-workflow-runs@v2
       with:
-        token: ${{ secrets.actions_release }}
         repository: ${{ github.repository }}
         retain_days: 7
         keep_minimum_runs: 6
