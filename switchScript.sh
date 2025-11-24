@@ -32,21 +32,15 @@ mkdir -p ./SwitchSD/switch/Switch_90DNS_tester
 mkdir -p ./SwitchSD/switch/DBI
 mkdir -p ./SwitchSD/switch/NX-Shell
 mkdir -p ./SwitchSD/switch/HB-App-Store
-mkdir -p ./SwitchSD/switch/HekateToolbox
 mkdir -p ./SwitchSD/switch/JKSV
-mkdir -p ./SwitchSD/switch/Moonlight
 mkdir -p ./SwitchSD/switch/NXThemesInstaller
-mkdir -p ./SwitchSD/switch/SimpleModDownloader
 mkdir -p ./SwitchSD/switch/Switchfin
-mkdir -p ./SwitchSD/switch/tencent-switcher-gui
-mkdir -p ./SwitchSD/switch/wiliwili
-mkdir -p ./SwitchSD/switch/NX-Activity-Log
 mkdir -p ./SwitchSD/switch/.overlays
 mkdir -p ./SwitchSD/switch/.packages
 
 cd SwitchSD
 
-latest_release_info=$(curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest)
+latest_release_info=$(curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/tags/1.10.0-prerelease)
 download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*atmosphere[^"]*.zip' | sed 's/"//g')
 curl -sL "$download_url" -o atmosphere.zip && {
     echo "atmosphere download\033[32m success\033[0m."
@@ -66,16 +60,6 @@ curl -sL "$download_url" -o hekate.zip && {
     unzip -oq hekate.zip
     rm hekate.zip
 } || echo "Hekate + Nyx CHS download\033[31m failed\033[0m."
-
-### Fetch Sigpatches from https://gbatemp.net/threads/sigpatches-for-atmosphere-hekate-fss0-fusee-package3.571543/
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/sigpatches.zip -o sigpatches.zip
-if [ $? -ne 0 ]; then
-    echo "sigpatches download\033[31m failed\033[0m."
-else
-    echo "sigpatches download\033[32m success\033[0m."
-    unzip -oq sigpatches.zip
-    rm sigpatches.zip
-fi
 
 curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/theme/logo.zip -o logo.zip
 if [ $? -ne 0 ]; then
@@ -114,34 +98,21 @@ curl -sL "$download_url" -o Switch_90DNS_tester.nro && {
     mv Switch_90DNS_tester.nro ./switch/Switch_90DNS_tester
 } || echo "Switch_90DNS_tester download\033[31m failed\033[0m."
 
-latest_release_info=$(curl -sL https://api.github.com/repos/rashevskyv/dbi/releases/135856657)
-download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*DBI.nro' | sed 's/"//g')
-curl -sL "$download_url" -o DBI.nro && {
+curl -sL https://raw.githubusercontent.com/ztzzxyz/SwitchScript/plugins/DBI.810.zhcn.nro -o DBI.nro
+if [ $? -ne 0 ]; then
+    echo "DBI download\033[31m failed\033[0m."
+else
     echo "DBI download\033[32m success\033[0m."
     mv DBI.nro ./switch/DBI
-} || echo "DBI download\033[31m failed\033[0m."
+fi
 
-latest_release_info=$(curl -sL https://api.github.com/repos/dragonflylee/Awoo-Installer/releases/latest)
-download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*Awoo-Installer.zip' | sed 's/"//g')
-curl -sL "$download_url" -o Awoo-Installer.zip && {
+download_url=$(curl -s "https://api.github.com/repos/dragonflylee/Awoo-Installer/actions/artifacts" \
+      | jq -r '.artifacts | map(select(.name == "Awoo-Installer")) | sort_by(.created_at) | last.archive_download_url')
+curl -H "Authorization: token $GH_TOKEN" -sL "$download_url" -o Awoo-Installer.zip && {
     echo "Awoo Installer download\033[32m success\033[0m."
     unzip -oq Awoo-Installer.zip
     rm Awoo-Installer.zip
 } || echo "Awoo Installer download\033[31m failed\033[0m."
-
-latest_release_info=$(curl -sL https://api.github.com/repos/WerWolv/Hekate-Toolbox/releases/latest)
-download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*HekateToolbox.nro' | sed 's/"//g')
-curl -sL "$download_url" -o HekateToolbox.nro && {
-    echo "HekateToolbox download\033[32m success\033[0m."
-    mv HekateToolbox.nro ./switch/HekateToolbox
-} || echo "HekateToolbox download\033[31m failed\033[0m."
-
-latest_release_info=$(curl -sL https://api.github.com/repos/zdm65477730/NX-Activity-Log/releases/latest)
-download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*NX-Activity-Log.nro' | sed 's/"//g')
-curl -sL "$download_url" -o NX-Activity-Log.nro && {
-    echo "NX-Activity-Log download\033[32m success\033[0m."
-    mv NX-Activity-Log.nro ./switch/NX-Activity-Log
-} || echo "NX-Activity-Log download\033[31m failed\033[0m."
 
 latest_release_info=$(curl -sL https://api.github.com/repos/exelix11/SwitchThemeInjector/releases/latest)
 download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*NXThemesInstaller.nro' | sed 's/"//g')
@@ -157,13 +128,6 @@ curl -sL "$download_url" -o JKSV.nro && {
     mv JKSV.nro ./switch/JKSV
 } || echo "JKSV download\033[31m failed\033[0m."
 
-latest_release_info=$(curl -sL https://api.github.com/repos/CaiMiao/Tencent-switcher-GUI/releases/latest)
-download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*tencent-switcher-gui.nro' | sed 's/"//g')
-curl -sL "$download_url" -o tencent-switcher-gui.nro && {
-    echo "Tencent-switcher-GUI download\033[32m success\033[0m."
-    mv tencent-switcher-gui.nro ./switch/tencent-switcher-gui
-} || echo "Tencent-switcher-GUI download\033[31m failed\033[0m."
-
 latest_release_info=$(curl -sL https://api.github.com/repos/HamletDuFromage/aio-switch-updater/releases/latest)
 download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*aio-switch-updater.zip' | sed 's/"//g')
 curl -sL "$download_url" -o aio-switch-updater.zip && {
@@ -171,23 +135,6 @@ curl -sL "$download_url" -o aio-switch-updater.zip && {
     unzip -oq aio-switch-updater.zip
     rm aio-switch-updater.zip
 } || echo "aio-switch-updater download\033[31m failed\033[0m."
-
-latest_release_info=$(curl -sL https://api.github.com/repos/xfangfang/wiliwili/releases/latest)
-download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*wiliwili-NintendoSwitch.zip' | sed 's/"//g')
-curl -sL "$download_url" -o wiliwili-NintendoSwitch.zip && {
-    echo "wiliwili download\033[32m success\033[0m."
-    unzip -oq wiliwili-NintendoSwitch.zip
-    mv wiliwili/wiliwili.nro ./switch/wiliwili
-    rm -rf wiliwili
-    rm wiliwili-NintendoSwitch.zip
-} || echo "wiliwili download\033[31m failed\033[0m."
-
-latest_release_info=$(curl -sL https://api.github.com/repos/PoloNX/SimpleModDownloader/releases/latest)
-download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*SimpleModDownloader.nro' | sed 's/"//g')
-curl -sL "$download_url" -o SimpleModDownloader.nro && {
-    echo "SimpleModDownloader download\033[32m success\033[0m."
-    mv SimpleModDownloader.nro ./switch/SimpleModDownloader
-} || echo "SimpleModDownloader download\033[31m failed\033[0m."
 
 latest_release_info=$(curl -sL https://api.github.com/repos/dragonflylee/switchfin/releases/latest)
 download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*Switchfin.nro' | sed 's/"//g')
@@ -210,21 +157,12 @@ curl -sL "$download_url" -o NX-Shell.nro&& {
     mv NX-Shell.nro ./switch/NX-Shell
 } || echo "NX-Shell download\033[31m failed\033[0m."
 
-latest_release_info=$(curl -sL https://api.github.com/repos/fortheusers/hb-appstore/releases/latest)
+latest_release_info=$(curl -sL https://api.github.com/repos/DefenderOfHyrule/hb-appstore/releases/latest)
 download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*appstore.nro' | sed 's/"//g')
 curl -sL "$download_url" -o appstore.nro&& {
     echo "hb-appstore download\033[32m success\033[0m."
     mv appstore.nro ./switch/HB-App-Store
 } || echo "hb-appstore download\033[31m failed\033[0m."
-
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/daybreak_x.zip -o daybreak_x.zip
-if [ $? -ne 0 ]; then
-    echo "daybreak download\033[31m failed\033[0m."
-else
-    echo "daybreak download\033[32m success\033[0m."
-    unzip -oq daybreak_x.zip
-    rm daybreak_x.zip
-fi
 
 git clone https://github.com/exelix11/theme-patches
 if [ $? -ne 0 ]; then
@@ -292,7 +230,7 @@ curl -sL "$download_url" -o ldn_mitm.zip&& {
     rm ldn_mitm.zip
 } || echo "ldn_mitm download\033[31m failed\033[0m."
 
-latest_release_info=$(curl -sL https://api.github.com/repos/zdm65477730/emuiibo/releases/latest)
+latest_release_info=$(curl -sL https://api.github.com/repos/DefenderOfHyrule/emuiibo/releases/latest)
 download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*emuiibo.zip' | sed 's/"//g')
 curl -sL "$download_url" -o emuiibo.zip&& {
     echo "emuiibo download\033[32m success\033[0m."
@@ -316,16 +254,15 @@ curl -sL "$download_url" -o Fizeau.zip&& {
     rm Fizeau.zip
 } || echo "Fizeau download\033[31m failed\033[0m."
 
-curl -sL https://raw.githubusercontent.com/huangqian8/SwitchPlugins/main/plugins/Zing.zip -o Zing.zip
-if [ $? -ne 0 ]; then
-    echo "Zing download\033[31m failed\033[0m."
-else
+latest_release_info=$(curl -sL https://api.github.com/repos/zdm65477730/Zing/releases/latest)
+download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*Zing.zip' | sed 's/"//g')
+curl -sL "$download_url" -o Zing.zip&& {
     echo "Zing download\033[32m success\033[0m."
     unzip -oq Zing.zip
     rm Zing.zip
-fi
+} || echo "Zing download\033[31m failed\033[0m."
 
-latest_release_info=$(curl -sL https://api.github.com/repos/HookedBehemoth/sys-tune/releases/latest)
+latest_release_info=$(curl -sL https://api.github.com/repos/HookedBehemoth/sys-tune/releases/tags/v2.1.0-beta.1)
 download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*sys-tune[^"]*.zip' | sed 's/"//g')
 curl -sL "$download_url" -o sys-tune.zip&& {
     echo "sys-tune download\033[32m success\033[0m."
@@ -349,17 +286,6 @@ curl -sL "$download_url" -o sys-clk.zip&& {
     rm sys-clk.zip
 } || echo "sys-clk download\033[31m failed\033[0m."
 
-latest_release_info=$(curl -sL https://api.github.com/repos/halop/OC_Toolkit_SC_EOS/releases/latest)
-download_url_1=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*kip.zip' | sed 's/"//g')
-download_url_2=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*OC.Toolkit.u.zip' | sed 's/"//g')
-curl -sL "$download_url_1" -o kip.zip&&curl -sL "$download_url_2" -o OC.Toolkit.u.zip&& {
-    echo "OC_Toolkit_SC_EOS download\033[32m success\033[0m."
-    unzip -oq kip.zip -d ./atmosphere/kips/
-    unzip -oq OC.Toolkit.u.zip -d ./switch/.packages/
-    rm kip.zip
-    rm OC.Toolkit.u.zip
-} || echo "OC_Toolkit_SC_EOS download\033[31m failed\033[0m."
-
 latest_release_info=$(curl -sL https://api.github.com/repos/ndeadly/MissionControl/releases/latest)
 download_url=$(echo "$latest_release_info" | grep -oP '"browser_download_url": "\Khttps://[^"]*MissionControl[^"]*.zip' | sed 's/"//g')
 curl -sL "$download_url" -o MissionControl.zip&& {
@@ -379,19 +305,13 @@ CommonProblemResolver
 Switch_90DNS_tester
 DBI
 Awoo-Installer
-Hekate-Toolbox
-NX-Activity-Log
 NXThemesInstaller
 JKSV
-Tencent-switcher-GUI
 aio-switch-updater
-wiliwili
-SimpleModDownloader
 Switchfin
 Moonlight
 NX-Shell
 hb-appstore
-daybreak
 nx-ovlloader
 Ultrahand-Overlay
 EdiZon
@@ -406,7 +326,6 @@ Zing
 sys-tune
 sys-patch
 sys-clk
-OC_Toolkit_SC_EOS
 MissionControl
 ENDOFFILE
 
@@ -644,7 +563,6 @@ fi
 ### Delete unneeded files
 rm -f switch/haze.nro
 rm -f switch/reboot_to_payload.nro
-rm -f switch/daybreak.nro
 
 # -------------------------------------------
 

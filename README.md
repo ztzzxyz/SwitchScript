@@ -4,30 +4,24 @@
 
 - 下载最新：
   - 大气层三件套
-    - [x] `Atmosphere + Fusee` [From Here](https://github.com/Atmosphere-NX/Atmosphere/releases/latest)
+    - [x] `Atmosphere + Fusee` [From Here](https://github.com/Atmosphere-NX/Atmosphere/releases)
     - [x] `Hekate + Nyx 简体中文` [From Here](https://github.com/easyworld/hekate/releases/latest)
-    - [x] `Sigpatches` [From Here](https://hackintendo.com/download/sigpatches/)
+    - [x] `sys-patch` [From Here](https://github.com/impeeza/sys-patch/releases/latest)
   - Payload插件
-    - [x] 主机系统的密钥提取工具 `Lockpick_RCM` [From Here](https://github.com/zdm65477730/Lockpick_RCMDecScots/releases/latest)
+    - [x] 主机系统的密钥提取工具 `Lockpick_RCM` [From Here](https://github.com/impeeza/Lockpick_RCMDecScots/releases/latest)
     - [x] Hekate下的文件管理工具 `TegraExplorer` [From Here](https://github.com/zdm65477730/TegraExplorer/releases/latest)
     - [x] Hekate下删除主题和关闭插件自动启动 `CommonProblemResolver` [From Here](https://github.com/zdm65477730/CommonProblemResolver/releases/latest)
   - Nro插件
     - [x] 联网检测是否屏蔽任天堂服务器 `Switch_90DNS_tester` [From Here](https://github.com/meganukebmp/Switch_90DNS_tester/releases/latest)
     - [x] 游戏安装，存档管理和文件传输工具 `DBI` [From Here](https://github.com/rashevskyv/dbi/releases/latest)
     - [x] 游戏安装和文件传输工具 `Awoo Installer` [From Here](https://github.com/dragonflylee/Awoo-Installer/releases/latest)
-    - [x] 深海工具箱 `Hekate-toolbox` [From Here](https://github.com/WerWolv/Hekate-Toolbox/releases/latest)
-    - [x] 游戏游玩时间记录工具 `NX-Activity-Log` [From Here](https://github.com/zdm65477730/NX-Activity-Log/releases/latest)
     - [x] 主题安装工具 `NXThemesInstaller` [From Here](https://github.com/exelix11/SwitchThemeInjector/releases/latest)
     - [x] 游戏存档管理工具 `JKSV` [From Here](https://github.com/J-D-K/JKSV/releases/latest)
-    - [x] 系统切换工具 `tencent-switcher-gui` [From Here](https://github.com/CaiMiao/Tencent-switcher-GUI/releases/latest)
     - [x] 多工具合一任天堂Switch更新器 `aio-switch-updater` [From Here](https://github.com/HamletDuFromage/aio-switch-updater/releases/latest)
-    - [x] 第三方B站客户端 `wiliwili` [From Here](https://github.com/xfangfang/wiliwili/releases/latest)
-    - [x] Mod下载器 `SimpleModDownloader` [From Here](https://github.com/PoloNX/SimpleModDownloader/releases/latest)
     - [x] Jellyfin客户端 `Switchfin` [From Here](https://github.com/dragonflylee/switchfin/releases/latest)
     - [x] 串流工具 `Moonlight` [From Here](https://github.com/XITRIX/Moonlight-Switch/releases/latest)
     - [x] 文件管理 `NX-Shell` [From Here](https://github.com/zdm65477730/NX-Shell/releases/latest)
-    - [x] 黑商店 `hb-appstore`  [From Here](https://github.com/fortheusers/hb-appstore/releases/latest)
-    - [x] 系统升级工具 `daybreak`  [From Here](https://www.tekqart.com/thread-258184-1-1.html)
+    - [x] 黑商店 `hb-appstore`  [From Here](https://github.com/DefenderOfHyrule/hb-appstore/releases/latest)
 
   - 补丁
     - [x] 主题破解 `theme-patches` [From Here](https://github.com/exelix11/theme-patches)
@@ -40,14 +34,12 @@
     - [x] 系统监视 `StatusMonitor` [From Here](https://github.com/zdm65477730/Status-Monitor-Overlay/releases/latest)
     - [x] 掌机底座模式切换 `ReverseNX-RT` [From Here](https://github.com/zdm65477730/ReverseNX-RT/releases/latest)
     - [x] 局域网联机 `ldn_mitm` [From Here](https://github.com/zdm65477730/ldn_mitm/releases/latest)
-    - [x] 虚拟Amiibo `emuiibo` [From Here](https://github.com/zdm65477730/emuiibo/releases/latest)
+    - [x] 虚拟Amiibo `emuiibo` [From Here](https://github.com/DefenderOfHyrule/emuiibo/releases/latest)
     - [x] 时间同步 `QuickNTP` [From Here](https://github.com/zdm65477730/QuickNTP/releases/latest)
     - [x] 色彩调整 `Fizeau` [From Here](https://github.com/zdm65477730/Fizeau/releases/latest)
     - [x] 金手指工具 `Zing` [From Here](https://www.tekqart.com/thread-222735-1-1.html)
     - [x] 后台音乐 `sys-tune` [From Here](https://github.com/HookedBehemoth/sys-tune/releases/latest)
-    - [x] 系统补丁 `sys-patch` [From Here](https://github.com/zdm65477730/sys-patch/releases/latest)
     - [x] 超频插件 `sys-clk` [From Here](https://github.com/zdm65477730/sys-clk/releases/latest)
-    - [x] 调频插件 `OC Toolkit` [From Here](https://github.com/halop/OC_Toolkit_SC_EOS/releases/latest)
 
   - 其他
     - [x] 蓝牙手柄插件 `MissionControl` [From Here](https://github.com/ndeadly/MissionControl/releases/latest)
@@ -70,6 +62,7 @@
   - 运行脚本（switchScript.sh）
 
 ## 更新日志
+- 2025-11-24 更新 `更新至21.0.0`
 - 2025-10-06 更新 `system_settings.ini`
 - 2025-05-27 精简代码，修正由于 `API` 限制而造成的运行错误
 - 2025-05-23 批量更新插件地址
